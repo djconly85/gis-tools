@@ -24,6 +24,7 @@ Python Version: 3.x
 
 
 import re
+import sys
 from pathlib import Path
 from dataclasses import dataclass, field
 from time import perf_counter
@@ -35,6 +36,9 @@ import geopandas as gpd
 import arcpy
 from arcgis.features import GeoAccessor, GeoSeriesAccessor
 
+
+sys.path.append(str(Path(__file__).parent))
+# import pdb; pdb.set_trace()
 from sqlqry2pandas import sqlqry_to_df
 from esri_file_to_dataframe import esri_to_df
 
@@ -68,7 +72,8 @@ class AssociateTbl:
         self.conn_str = f"DRIVER={self.sql_driver};" \
             f"SERVER={self.servername};" \
             f"DATABASE={self.dbname};" \
-            f"Trusted_Connection={self.trustedconn};"
+            f"Trusted_Connection={self.trustedconn};" \
+            f"TrustServerCertificate={self.trustedconn}"
         
         # establish main connection that maintains global temp table 
         self.main_conn = pyodbc.connect(self.conn_str)

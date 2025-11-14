@@ -44,7 +44,8 @@ def sqlqry_to_df(query_str, dbname, servername='SQL-SVR', trustedconn='yes', chu
     conn_str = f"DRIVER={driver};" \
         f"SERVER={servername};" \
         f"DATABASE={dbname};" \
-        f"Trusted_Connection={trustedconn}"
+        f"Trusted_Connection={trustedconn};" \
+        f"TrustServerCertificate={trustedconn}"
         
     conn_str = urllib.parse.quote_plus(conn_str)
     engine = sqla.create_engine(f"mssql+pyodbc:///?odbc_connect={conn_str}")
